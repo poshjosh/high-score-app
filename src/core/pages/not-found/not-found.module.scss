@@ -1,0 +1,16 @@
+@import "src/components/styles/base-units";
+
+.wrapper {
+	margin-top: $base-unit * 4.5;
+}
+
+.action {
+	width: 100%;
+	max-width: $base-unit * 16.75;
+}
+
+.linkWrapper {
+	margin-top: $base-unit * 2;
+	text-align: center;
+	display: block;
+}

@@ -1,0 +1,17 @@
+@import "./src/components/styles/base-units.scss";
+@import "./src/components/styles/colors.scss";
+
+.select {
+  font-size: $base-unit * 1.125;
+  border: 1px solid $color-border;
+  border-radius: $base-unit * 0.25;
+  -webkit-appearance: menulist-button;
+  height: $base-unit * 2.25;
+}
+
+.header {
+  font-weight: bold;
+  font-size: $base-unit * 1.5;
+  margin: $base-unit;
+  padding: $base-unit * 0.5;
+}

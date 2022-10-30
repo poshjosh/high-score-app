@@ -1,0 +1,44 @@
+@import "./src/components/styles/base-units.scss";
+@import "./src/components/styles/colors.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.description {
+  padding: $base-unit * 0.5;
+  margin: $base-unit;
+}
+
+.form {
+  padding: $base-unit * 0.5;
+  margin: $base-unit;
+  border: 1px solid $color-border;
+  flex-grow: 1;
+}
+
+.form input {
+  font-size: $base-unit * 1.125;
+  border: 1px solid $color-darker;
+  border-radius: $base-unit * 0.25;
+  padding: $base-unit * 0.4;
+}
+
+.form button {
+  border: 1px solid transparent;
+  border-radius: $base-unit * 0.25;
+  padding: $base-unit * 0.75;
+  margin: $base-unit;
+  min-width: $base-unit * 6;
+  display: inline-block;
+  font-size: $base-unit * 0.8;
+  font-weight: bold;
+  background-color: #1e99cc;
+  color: white;
+}
+
+.form button:hover {
+  background-color: #3fbbee;
+}
+
