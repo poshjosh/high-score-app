@@ -1,0 +1,10 @@
+@import "../styles/base-units";
+
+.error {
+	display: flex;
+	justify-content: space-between;
+	padding: $base-unit * 0.5;
+	margin: $base-unit * 1.5;
+	color: #ff7750;
+	background-color: #faebd7;
+}

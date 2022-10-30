@@ -1,0 +1,13 @@
+@import "./src/components/styles/base-units";
+@import "./src/components/styles/colors";
+
+.pageHeader {
+  text-align: center;
+  font-weight: bold;
+  font-size: $base-unit * 2;
+  background-color: #123456;
+  border-radius: $base-unit * 2.5;
+  margin: $base-unit $base-unit * 4;
+  color: white;
+  padding: $base-unit;
+}

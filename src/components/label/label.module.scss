@@ -1,0 +1,18 @@
+@import "./src/components/styles/base-units.scss";
+@import "./src/components/styles/colors.scss";
+
+.label {
+  cursor: pointer;
+  margin: $base-unit * 1.5;
+  display: block;
+}
+
+.label > span {
+  border: 1px solid $color-border;
+  border-radius: $base-unit * 0.25;
+  padding: $base-unit * 0.5;
+  margin-right: $base-unit;
+  min-width: $base-unit * 5;
+  display: inline-block;
+}
+
