@@ -7,15 +7,20 @@
 }
 
 .description {
-  padding: $base-unit * 0.5;
+  padding: 0;
   margin: $base-unit;
+}
+
+.message {
+  max-width: $base-unit * 21;
 }
 
 .form {
   padding: $base-unit * 0.5;
   margin: $base-unit;
   border: 1px solid $color-border;
-  flex-grow: 1;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .form input {

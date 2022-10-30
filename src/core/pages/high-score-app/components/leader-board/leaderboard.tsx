@@ -17,7 +17,7 @@ export type LeaderboardProps = {
 }
 
 export const Leaderboard = ({ refreshAccessor } : LeaderboardProps) => {
-    console.log("" + new Date() +  "Leaderboard")
+
     const { t } = useTranslation()
 
     const sortByAverage = "sort-by-average"
@@ -71,9 +71,6 @@ export const Leaderboard = ({ refreshAccessor } : LeaderboardProps) => {
                 ? <LoadingSpinner />
                 : (
                      <>
-                         <header className={styles.header}>
-                             {t(translationKeys.core.leaderboardTitle)}
-                         </header>
                          <Label name="sort-by" label={t(translationKeys.core.sortBy)}>
                              <select
                                  className={styles.select}
@@ -88,7 +85,7 @@ export const Leaderboard = ({ refreshAccessor } : LeaderboardProps) => {
                                  })}
                              </select>
                          </Label>
-                         <Table columns={columns} data={tableData} />
+                         <Table caption={t(translationKeys.core.leaderboardTitle)} columns={columns} data={tableData} />
                      </>
                  )
             }

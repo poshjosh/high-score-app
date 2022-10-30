@@ -10,12 +10,26 @@
 	flex-direction: column;
 }
 
+.caption {
+	font-weight: bold;
+	font-size: $base-unit * 1.25;
+	margin-bottom: $base-unit * 0.5;
+	padding: $base-unit * 0.5;
+	border-bottom: 1px solid $color-border;
+}
+
 .body {
 	flex-grow: 1;
 }
 
 .row {
 	display: flex;
+	border-bottom: 1px solid $color-border;
+}
+
+.row:last-child {
+	display: flex;
+	border-bottom: none;
 }
 
 .row:hover {

@@ -13,6 +13,7 @@ export type TableColumnType = {
 }
 
 export type TableProps<T extends TableRowType> = {
+	caption?: string
 	columns: TableColumnType[]
 	data: T[]
 } & TableHTMLAttributes<TableRowType>

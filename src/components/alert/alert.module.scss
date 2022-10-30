@@ -1,10 +1,19 @@
 @import "../styles/base-units";
 
-.error {
+.message {
 	display: flex;
 	justify-content: space-between;
 	padding: $base-unit * 0.5;
 	margin: $base-unit * 1.5;
-	color: #ff7750;
-	background-color: #faebd7;
+
+	&Error {
+		color: #ff7750;
+		background-color: #faebd7;
+	}
+
+	&Success {
+		color: #008800;
+		background-color: #afeeee;
+	}
 }
+

@@ -9,12 +9,13 @@ const stylesAlignMap = {
 	[AlignType.Center]: undefined,
 }
 
-export const Table = <T extends TableRowType>({ columns, data }: TableProps<T>) => {
+export const Table = <T extends TableRowType>({ caption, columns, data }: TableProps<T>) => {
 	const getCellClassNames = (align: AlignType = AlignType.Center) => joinClassNames(styles.cell, stylesAlignMap[align])
 	const getCellStyles = (column: TableColumnType) => ({ flex: column.flex || 1 })
 
 	return (
 		<table className={styles.table}>
+			{caption && <caption className={styles.caption}>{caption}</caption>}
 			<thead>
 				<tr className={styles.header}>
 					{columns.map(column => (

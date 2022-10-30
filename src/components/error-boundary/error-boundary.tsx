@@ -1,5 +1,5 @@
 import React, { ErrorInfo, PropsWithChildren} from "react"
-import { ErrorMessage } from "../error-message/error-message"
+import { Alert } from "../alert/alert"
 
 export type ErrorBoundaryProps = {
     errorMessage?: string
@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component<PropsWithChildren<ErrorBoundaryProps
 
     render() {
         if (this.state.hasError) {
-            return <ErrorMessage message={this.getErrorMessage()} />
+            return <Alert message={this.getErrorMessage()} isError={true} />
         }
 
         return this.props.children

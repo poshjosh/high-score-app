@@ -1,21 +1,22 @@
 import React, { FC, PropsWithChildren } from "react"
 
-import { ErrorMessage } from "../error-message/error-message"
+import { Alert } from "../alert/alert"
 import { Label } from "../label/label"
 
 export type FormFieldProps = {
-    name?: string,
-    label: string,
-    error?: string,
+    name?: string
+    label: string
+    error?: string
+    errorStyleClassNames?: string
 }
 
 export const FormField: FC<PropsWithChildren<FormFieldProps>> = (
-    { children, name, label, error }
+    { children, name, label, error, errorStyleClassNames }
 ) => {
     return (
         <>
             <Label name={name} label={label}>{children}</Label>
-            {error && <ErrorMessage message={error} />}
+            {error && <Alert styleClassNames={errorStyleClassNames} message={error} isError={true} />}
         </>
     )
 }

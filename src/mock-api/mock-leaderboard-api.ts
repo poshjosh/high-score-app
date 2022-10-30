@@ -49,8 +49,9 @@ const postLeaderboardEntry = (newEntry?: LeaderboardEntry): string => {
     if (!newEntry) {
         return newResponse(400, "Nothing to post")
     }
-    if (!isValidLeaderboardEntry(newEntry)) {
-        return newResponse(400, "Invalid request")
+    const errorField = validateLeaderboardEntry(newEntry)
+    if (errorField) {
+        return newResponse(400, "Invalid " + errorField)
     }
     const entries: Array<LeaderboardEntry> = getLeaderboardEntriesFromLocalStorage()
     const existing = entries.find(entry => entry.name === newEntry.name)
@@ -68,8 +69,10 @@ const postLeaderboardEntry = (newEntry?: LeaderboardEntry): string => {
     return newResponse(201, "Created", isNewEntryTopOfLeaderboard)
 }
 
-const isValidLeaderboardEntry = (leaderboardEntry: LeaderboardEntry): boolean => {
-    return !!leaderboardEntry.name
+const validateLeaderboardEntry = (leaderboardEntry: LeaderboardEntry): string | undefined => {
+    if (!leaderboardEntry.name) {
+        return "name"
+    }
 }
 
 const getLeaderboardEntries = (): string => {

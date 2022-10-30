@@ -1,4 +1,4 @@
-import {maxClicks, maxScore} from "../../core/pages/high-score-app/library/constants";
+import { maxClicks, maxScore } from "../../core/pages/high-score-app/library/constants"
 
 export const error = {
     fallbackMessage: "An unexpected error occurred",
@@ -22,6 +22,7 @@ export const core = {
     maxClicksReached: "You reached the maximum of %s clicks. The next click will submit your score",
     leaderboardTitle: "Leaderboard",
     gameDescription: `You have ${maxClicks} clicks to reach a maximum score of ${maxScore}`,
+    scoreSubmitted: "Score submitted",
 }
 
 export const translationKeys = {
