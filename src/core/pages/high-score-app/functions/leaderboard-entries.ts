@@ -3,6 +3,17 @@ import { FetchResponse, LeaderboardEntry, RequestMethod } from "../library/types
 import { maxClicks, maxLeaderboardEntries, mockLeaderboardApiPath } from "../library/constants"
 import { sendMockRequest } from "../../../../mock-api/mock-leaderboard-api"
 
+export const computeAveragePerClick = (entry: LeaderboardEntry): number => {
+    if (entry.totalPoints === 0) {
+        return 0
+    }
+    if (entry.clicks === 0) {
+        throw new Error("Positive total points may not be reached with zero clicks")
+    }
+    const averagePerClick = entry.totalPoints / entry.clicks
+    return Math.round((averagePerClick + Number.EPSILON) * 100) / 100
+}
+
 export const postLeaderboardEntry = (
     leaderboardEntry: LeaderboardEntry, onSuccess?: () => void, onError?: (reason: any) => void
 ) => {

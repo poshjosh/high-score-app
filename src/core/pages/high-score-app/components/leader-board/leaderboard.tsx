@@ -1,7 +1,11 @@
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react"
 
 import {FetchStatus, LeaderboardEntry} from "../../library/types"
-import {limitLeaderboardEntries, sortLeaderboardEntries} from "../../functions/leaderboard-entries"
+import {
+    computeAveragePerClick,
+    limitLeaderboardEntries,
+    sortLeaderboardEntries
+} from "../../functions/leaderboard-entries"
 import useCustomFetch from "../../functions/use-custom-fetch"
 import {Table} from "../../../../../components/table/table"
 import {AlignType, TableRowType} from "../../../../../components/table/common/library/types"
@@ -30,7 +34,7 @@ export const Leaderboard = ({ refreshAccessor } : LeaderboardProps) => {
     const [ selectedSortOptionValue, setSelectedSortOptionValue] = useState<string>(sortOptions[0].value)
 
     const getEntryValueForSorting = (entry: LeaderboardEntry) => {
-        return sortByAverage === selectedSortOptionValue ? entry.totalPoints / entry.clicks : entry.totalPoints
+        return sortByAverage === selectedSortOptionValue ? computeAveragePerClick(entry) : entry.totalPoints
     }
 
     const sortThenLimitEntries = (entries: Array<LeaderboardEntry>) => {
@@ -46,20 +50,23 @@ export const Leaderboard = ({ refreshAccessor } : LeaderboardProps) => {
         if (refresh) setRefresh(false)
     }, [refresh, setRefresh])
 
-    const { name, score, numberOfClicks } = translationKeys.core
-    const columns = [ name, score, numberOfClicks ].map((columnName, index) => {
-        const alignType = columnName === name ? AlignType.Left : AlignType.Right
-        return { key: "leaderboard-column-" + index, title: columnName, align: alignType }
+    const { name, score, numberOfClicks, averagePointsPerClick } = translationKeys.core
+    const columns = [ name, score, numberOfClicks, averagePointsPerClick ]
+        .map((columnName, index) => {
+            const alignType = columnName === name ? AlignType.Left : AlignType.Right
+            return { key: "leaderboard-column-" + index, title: columnName, align: alignType }
     })
 
     const tableData: Array<TableRowType> = []
     response?.body?.forEach((entry: LeaderboardEntry, index: number) => {
         const { name, totalPoints, clicks } = entry
-        tableData.push({ key: "leaderboard-row-" + index, values: [ name, totalPoints, clicks], })
+        const averagePerClick = computeAveragePerClick(entry)
+        tableData.push({
+            key: "leaderboard-row-" + index, values: [ name, totalPoints, clicks, averagePerClick ],
+        })
     })
 
     const handleSortOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        event.preventDefault()
         setSelectedSortOptionValue(event.target.value)
         setRefresh(true)
     }

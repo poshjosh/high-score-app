@@ -11,7 +11,7 @@ import {Alert} from "../../../../../components/alert/alert"
 import styles from "./gameplay-card.module.scss"
 
 type Message = {
-    text: string
+    message: string
     isError?: boolean
 }
 
@@ -23,32 +23,33 @@ export const GameplayCard = ({ onNewTopTenScore } : GameplayCardProps) => {
 
     const { t } = useTranslation()
 
+    const noMessage = { message: "" }
+
     const [formData, setFormData] = useState<LeaderboardEntry>(nextOrFirstLeaderboardEntry())
     const [nameError, setNameError] = useState<string>("")
     const [maxClicksError, setMaxClicksError] = useState<string>("")
-    const [submitMessage, setSubmitMessage] = useState<Message>({ text: "" })
+    const [submitMessage, setSubmitMessage] = useState<Message>(noMessage)
+
+    const updateMessages = (name: string) => {
+        if (name) {
+            nameError && setNameError("")
+        } else {
+            !nameError && setNameError(t(translationKeys.core.provideAName))
+        }
+        maxClicksError && setMaxClicksError("")
+        submitMessage.message && setSubmitMessage(noMessage)
+    }
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault()
-
+        const name = event.target.value
         // A name change triggers a reset
-        setFormData({ name: event.target.value, totalPoints: 0, clicks: 0 })
-
-        setSubmitMessage({ text: "" })
+        setFormData({ name, totalPoints: 0, clicks: 0 })
+        updateMessages(name)
     }
 
     const validateName = (name: string) => {
-        if (name && nameError) {
-            setNameError("")
-        } else if (!name && !nameError) {
-            setNameError(t(translationKeys.core.provideAName))
-        }
+        updateMessages(name)
         return !!name
-    }
-
-    const handleNameBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        event.preventDefault()
-        validateName(event.target.value)
     }
 
     const updateLeaderboardThenForm = (formUpdate: LeaderboardEntry, leaderboardUpdate: LeaderboardEntry) => {
@@ -56,11 +57,11 @@ export const GameplayCard = ({ onNewTopTenScore } : GameplayCardProps) => {
             onNewTopTenScore?.()
             setFormData(formUpdate)
             maxClicksError && setMaxClicksError("")
-            setSubmitMessage({ text: t(translationKeys.core.scoreSubmitted) })
+            setSubmitMessage({ message: t(translationKeys.core.scoreSubmitted) })
         }
         const onError = (reason: any) => {
             const arg = reason ? (t(translationKeys.core.reason) + ": " + reason) : ""
-            setSubmitMessage({ text: t(translationKeys.core.submitError, arg), isError: true })
+            setSubmitMessage({ message: t(translationKeys.core.submitError, arg), isError: true })
         }
         postLeaderboardEntry(leaderboardUpdate, onSuccess, onError)
     }
@@ -101,8 +102,8 @@ export const GameplayCard = ({ onNewTopTenScore } : GameplayCardProps) => {
 
                 <FormField name="name" label={t(translationKeys.core.name)}
                            error={nameError} errorStyleClassNames={styles.message}>
-                    <input type="text" name="name" value={formData.name} maxLength={125}
-                           onChange={handleNameChange} onBlur={handleNameBlur}
+                    <input type="text" name="name" value={formData.name}
+                           maxLength={125} onChange={handleNameChange}
                     />
                 </FormField>
                 <FormField label={t(translationKeys.core.score)}>
@@ -113,10 +114,10 @@ export const GameplayCard = ({ onNewTopTenScore } : GameplayCardProps) => {
                 </FormField>
 
                 {maxClicksError && <Alert styleClassNames={styles.message} message={maxClicksError} isError={true} />}
-                {submitMessage.text && <Alert styleClassNames={styles.message} message={submitMessage.text} isError={submitMessage.isError} />}
+                {submitMessage.message && <Alert styleClassNames={styles.message} {...submitMessage} />}
 
-                <button onClick={handleNext}>{t(translationKeys.core.newScore)}</button>
-                <button type="submit" onClick={handleSubmit}>{t(translationKeys.core.submitScore)}</button>
+                <button onClick={handleNext}>{t(translationKeys.core.click)}</button>
+                <button onClick={handleSubmit}>{t(translationKeys.core.submitScore)}</button>
             </form>
         </section>
     )

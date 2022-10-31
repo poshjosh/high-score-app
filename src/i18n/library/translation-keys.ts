@@ -11,7 +11,7 @@ export const core = {
     score: "Score",
     numberOfClicks: "Number of clicks",
     clicksLeft: "Clicks left",
-    newScore: "New score",
+    click: "Click",
     submitScore: "Submit score",
     provideAName: "Please provide a name",
     sortBy: "Sort by",

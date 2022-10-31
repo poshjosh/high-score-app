@@ -2,14 +2,14 @@ import { joinClassNames } from "../utils/functions/join-class-names"
 
 import styles from "./alert.module.scss"
 
-export type ErrorMessageProps = {
+export type AlertProperties = {
 	message?: string
 	styleClassNames?: string
 	isError?: boolean
 	testId?: string
 }
 
-export const Alert = ({ message, styleClassNames, isError, testId }: ErrorMessageProps) => {
+export const Alert = ({ message, styleClassNames, isError, testId }: AlertProperties) => {
 	if (!message) {
 		return null
 	}
