@@ -9,10 +9,11 @@ import {
 import useCustomFetch from "../../functions/use-custom-fetch"
 import {Table} from "../../../../../components/table/table"
 import {AlignType, TableRowType} from "../../../../../components/table/common/library/types"
-import {translationKeys} from "../../../../../i18n/library/translation-keys"
 import {LoadingSpinner} from "../../../../../components/loading-spinner/loading-spinner"
-import {useTranslation} from "../../../../../i18n/functions/use-translation"
 import {Label} from "../../../../../components/label/label"
+import {Alert} from "../../../../../components/alert/alert"
+import {translationKeys} from "../../../../../i18n/library/translation-keys"
+import {useTranslation} from "../../../../../i18n/functions/use-translation"
 
 import styles from "./leaderboard.module.scss"
 
@@ -76,6 +77,8 @@ export const Leaderboard = ({ refreshAccessor } : LeaderboardProps) => {
             {
                 status === FetchStatus.Fetching
                 ? <LoadingSpinner />
+                : status === FetchStatus.Error
+                ? <Alert message={t(translationKeys.core.leaderboardError)} isError={true} />
                 : (
                      <>
                          <Label name="sort-by" label={t(translationKeys.core.sortBy)}>

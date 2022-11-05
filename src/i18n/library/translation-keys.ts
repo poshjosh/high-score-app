@@ -23,6 +23,7 @@ export const core = {
     leaderboardTitle: "Leaderboard",
     gameDescription: `You have ${maxClicks} clicks to reach a maximum score of ${maxScore}`,
     scoreSubmitted: "Score submitted",
+    leaderboardError: "Failed to load leaderboard",
 }
 
 export const translationKeys = {

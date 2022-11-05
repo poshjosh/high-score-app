@@ -9,6 +9,7 @@ export enum FetchStatus {
     Idle = "Idle",
     Fetching = "Fetching",
     Fetched = "Fetched",
+    Error = "Error",
 }
 
 export type FetchResponse<T> = {
@@ -20,6 +21,7 @@ export type FetchResponse<T> = {
 export type FetchResult<T> = {
     status: FetchStatus,
     response?: FetchResponse<T>
+    error?: any
 }
 
 export type LeaderboardEntry = {
